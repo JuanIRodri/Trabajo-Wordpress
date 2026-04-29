@@ -47,5 +47,5 @@ Cada producto tiene:
 - Redes sociales
 
 ## Herramientas utilizadas
-- GitHub (para versionado)
-- Trello (para organización de tareas)
+- [GitHub](https://github.com/JuanIRodri/Trabajo-Wordpress) (para versionado)
+- [Trello](https://trello.com/invite/b/69ebdf7ab66e617ffd82590d/ATTI6e6ce8e22e1e25ef50b6119bc1adc77fB729089B/trabajo-wordpress) (para organización de tareas)
