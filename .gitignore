@@ -1,0 +1,45 @@
+# Ignorar archivos de sistema y logs
+.DS_Store
+*.log
+
+
+# Ignorar la carpeta de datos de la base de datos (si llegás a usar un bind mount)
+db_data/
+
+# Ignorar archivos internos de WordPress que Docker genera
+# Generalmente solo queremos subir nuestros temas o plugins propios
+wp-content/upgrade/
+wp-content/cache/
+wp-content/blogs.dir/
+
+# Si van a desarrollar un tema propio, NO ignoren wp-content/themes/nombre-de-tu-tema
+# Pero si quieren ignorar todo lo que viene por defecto:
+# wp-content/themes/twentytwentytwo/
+# wp-content/themes/twentytwentythree/
+# wp-content/themes/twentytwentyfour/
+
+
+
+# 1. Imágenes y archivos subidos 
+
+wp-content/uploads/
+
+# 2. Traducciones
+# WordPress las descarga automáticamente según el idioma
+wp-content/languages/
+
+# 3. Plugins y Temas
+# Si usamos plugins de la tienda oficial, no hace falta subirlos. 
+# Solo subir los que programemos o los que sean "Premium" (manuales).
+wp-content/plugins/*
+!wp-content/plugins/index.php
+
+# Ignorar todos los temas, excepto el que vamos a crear
+wp-content/themes/*
+!wp-content/themes/index.php
+
+
+# 4. Archivos temporales de Linux/Editores
+*~
+*.swp
+.fuse_hidden*
