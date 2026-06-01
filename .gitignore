@@ -5,6 +5,7 @@
 
 # Ignorar la carpeta de datos de la base de datos (si llegás a usar un bind mount)
 db_data/
+*.sql
 
 # Ignorar archivos internos de WordPress que Docker genera
 # Generalmente solo queremos subir nuestros temas o plugins propios

@@ -22,7 +22,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    image: wordpress:6.4.3-php8.2-apache
+    build: .
     container_name: wp_site_fijo
     restart: always
     environment:
