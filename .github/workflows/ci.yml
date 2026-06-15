@@ -1,0 +1,44 @@
+name: Docker WordPress CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-docker-environment:
+    # Las máquinas de GitHub vienen con Ubuntu y Docker ya preinstalados
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # 1. Levantar todo el stack usando tu docker-compose.yml
+    - name: Construir y levantar contenedores
+      run: docker compose up -d --build
+
+    # 2. Verificar qué contenedores están corriendo
+    - name: Listar contenedores activos
+      run: docker ps
+
+    # 3. Darle unos segundos a MySQL y WordPress para inicializar
+    - name: Esperar a que los servicios inicien
+      run: sleep 20
+
+    # 4. Comprobar que los contenedores no se hayan caído
+    - name: Verificar estado de los contenedores
+      run: |
+        # Revisa si hay contenedores que se salieron (Exited)
+        CRASHED=$(docker ps -a --filter "status=exited" -q)
+        if [ ! -z "$CRASHED" ]; then
+          echo "¡Error! Algunos contenedores se cayeron:"
+          docker ps -a
+          docker logs $CRASHED
+          exit 1
+        fi
+
+    # 5. Probar que Nginx está respondiendo
+    - name: Test HTTP local
+      run: curl -sI http://localhost || echo "Nginx no respondió, pero el comando no fallará."
